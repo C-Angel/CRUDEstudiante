@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: head">
+</head>
+
+<body>
+	<header th:replace="plantilla/template :: header"></header>
+	<div class="container">
+		<h1 th:text="${titulo}"></h1>
+		<!--<p th:text="${estudiantes}"></p>-->
+	</div>
+
+	<div class="container">
+	
+		<a class="btn btn-primary btn-sm" th:href="@{/crear}"
+			th:text="'Nuevo Estudiante'" title="Crear Nuevo Estudiante"></a>
+	
+		<table class="table">
+			<thead class="thead-dark">
+				<th scope="col">Id</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Apellido</th>
+				<th scope="col">Telefono</th>
+				<th scope="col">Correo</th>
+				<th scope="col">Ciudad</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</thead>
+
+			<tbody>
+				<tr th:each="est:${estudiantes}">
+					<th scope="row" th:text="${est.idestudiante}"></th>
+					<td th:text="${est.nombres}"></td>
+					<td th:text="${est.apellidos}"></td>
+					<td th:text="${est.telefono}"></td>
+					<td th:text="${est.email}"></td>
+					<td th:text="${est.pais.nompais}"></td>
+					<td>
+						<a class="btn btn-success btn-sm" th:href="@{/edit/} + ${est.idestudiante}"
+							th:text="'Editar'" title="Editar Registro"></a>
+					</td>
+					<td>
+						<a class="btn btn-danger btn-sm" th:href="@{/delete/} + ${est.idestudiante}"
+							th:text="'Eliminar'" title="Eliminar Registro"
+							onclick="return confirm('Esta seguro de eliminar el Registro?');"></a>
+					</td>					
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+	
+	<footer th:replace="plantilla/template :: footer"></footer>
+</body>
+
+</html>
